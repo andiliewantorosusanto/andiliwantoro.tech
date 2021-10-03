@@ -1,6 +1,8 @@
 class Star {
-    constructor(ctx,x,y) {
+    constructor(ctx,x,y,cx,cy) {
         this.ctx = ctx;
+        
+        //coordinate
         this.x = x;
         this.y = y;
     }
@@ -13,7 +15,9 @@ class Star {
     }
 
     update() {
-        this.x++;
-        this.y++;
+        this.x = this.x * 1.01;
+        this.y = this.y * 1.01;
     }
+
+    
 }
