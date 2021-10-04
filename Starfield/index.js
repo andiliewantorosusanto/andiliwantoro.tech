@@ -1,17 +1,20 @@
 let stars = [];
 
-function init() {
-    clear();
-
-    for (let i = 0; i < 100; i++) {
+function createStars(i = 1) {
+    for (let j = 1; j <= i; j++) {
         stars.push(
             new Star(
-                ctx,
                 Math.random() * canvas.width - canvas.width / 2,
                 Math.random() * canvas.height - canvas.height / 2
             )
         );
     }
+}
+
+function init() {
+    clear();
+
+    createStars(100);
 
     update();
 }
@@ -21,20 +24,14 @@ function update() {
 
     ctx.translate(canvas.width / 2, canvas.height / 2);
     stars.forEach(s => {
-        s.draw();
+        s.draw(ctx);
         s.update();
     });
     ctx.translate(-canvas.width / 2, -canvas.height / 2);
 
     stars = stars.filter(star => !star.isOutOfBoundary(canvas.width, canvas.height));
 
-    stars.push(
-        new Star(
-            ctx,
-            Math.random() * canvas.width - canvas.width / 2,
-            Math.random() * canvas.height - canvas.height / 2
-        )
-    );
+    createStars();
 
     requestAnimationFrame(update);
 }
